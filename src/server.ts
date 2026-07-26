@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
 import { config } from './config/env.js';
 import { healthRoutes } from './routes/health.js';
+import { apiRoutes } from './routes/api-routes.js';
 
 export async function createServer(): Promise<FastifyInstance> {
   const server = Fastify({
@@ -16,17 +17,10 @@ export async function createServer(): Promise<FastifyInstance> {
     genReqId: () => crypto.randomUUID(),
   });
 
-  // Security headers
   await server.register(helmet, { contentSecurityPolicy: false });
-
-  // CORS
-  await server.register(cors, {
-    origin: config.CORS_ORIGINS,
-    credentials: true,
-  });
-
-  // Routes
+  await server.register(cors, { origin: config.CORS_ORIGINS, credentials: true });
   await server.register(healthRoutes, { prefix: '/v1' });
+  await server.register(apiRoutes, { prefix: '/v1' });
 
   return server;
 }
