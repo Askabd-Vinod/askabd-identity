@@ -7,3 +7,5 @@ export { RateLimiter, type RateLimitResult } from './rate-limiter.js';
 export { TokenService, resetTokenKeys, type TokenClaims, type TokenPair, type TokenValidation } from './token-service.js';
 export { MfaService, base32Encode, base32Decode, type MfaEnrollment } from './mfa-service.js';
 export { AuthService, type LoginInput, type LoginResult } from './auth-service.js';
+export { AuthorizationService, type Role } from './authorization-service.js';
+export { WebhookDispatcher, type WebhookRegistration } from './webhook-dispatcher.js';
