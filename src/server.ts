@@ -13,7 +13,7 @@ export async function createServer(): Promise<FastifyInstance> {
           ? { target: 'pino-pretty', options: { colorize: true } }
           : undefined,
     },
-    requestId: true,
+    genReqId: () => crypto.randomUUID(),
   });
 
   // Security headers
